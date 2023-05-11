@@ -226,6 +226,7 @@ public abstract class NettyRemotingAbstract {
                             processor.asyncProcessRequest(ctx, cmd, callback);
                         } else {
                             NettyRequestProcessor processor = pair.getObject1();
+                            // 真正处理请求的地方
                             RemotingCommand response = processor.processRequest(ctx, cmd);
                             callback.callback(response);
                         }

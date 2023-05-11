@@ -205,9 +205,10 @@ public class MappedFile extends ReferenceResource {
         assert cb != null;
 
         int currentPos = this.wrotePosition.get();
-
+        // 开始落盘的逻辑
         if (currentPos < this.fileSize) {
             ByteBuffer byteBuffer = writeBuffer != null ? writeBuffer.slice() : this.mappedByteBuffer.slice();
+            // 设置当前的写入位置
             byteBuffer.position(currentPos);
             AppendMessageResult result;
             if (messageExt instanceof MessageExtBrokerInner) {
@@ -241,6 +242,7 @@ public class MappedFile extends ReferenceResource {
             } catch (Throwable e) {
                 log.error("Error occurred when append message to mappedFile.", e);
             }
+            // 更新写入的位置
             this.wrotePosition.addAndGet(data.length);
             return true;
         }
