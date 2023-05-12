@@ -31,7 +31,7 @@ public class Producer {
         /*
          * Instantiate with a producer group name.
          */
-        DefaultMQProducer producer = new DefaultMQProducer("please_rename_unique_group_name");
+        DefaultMQProducer producer = new DefaultMQProducer("basic_sync_producer_group");
 
         /*
          * Specify name server addresses.
@@ -50,7 +50,7 @@ public class Producer {
          */
         producer.start();
 
-        for (int i = 0; i < 1000; i++) {
+        for (int i = 0; i < 2; i++) {
             try {
 
                 /*
@@ -109,6 +109,8 @@ public class Producer {
         /*
          * Shut down once the producer instance is not longer in use.
          */
+        System.out.println("Send Over.");
+        Thread.sleep(1000000);
         producer.shutdown();
     }
 }
